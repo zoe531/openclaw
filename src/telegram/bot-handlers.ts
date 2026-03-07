@@ -1014,9 +1014,10 @@ export const registerTelegramHandlers = ({
     const conversationThreadId = resolvedThreadId ?? dmThreadId;
     const conversationKey =
       conversationThreadId != null ? `${chatId}:topic:${conversationThreadId}` : String(chatId);
+    const messageId = msg.message_id != null ? String(msg.message_id) : "unknown";
     const debounceLane = resolveTelegramDebounceLane(msg);
     const debounceKey = senderId
-      ? `telegram:${accountId ?? "default"}:${conversationKey}:${senderId}:${debounceLane}`
+      ? `telegram:${accountId ?? "default"}:${conversationKey}:${senderId}:${messageId}:${debounceLane}`
       : null;
     await inboundDebouncer.enqueue({
       ctx,
