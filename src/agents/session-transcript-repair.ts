@@ -143,7 +143,7 @@ function makeMissingToolResult(params: {
     content: [
       {
         type: "text",
-        text: "[openclaw] missing tool result in session history; inserted synthetic error result for transcript repair.",
+        text: "[openclaw] tool result not captured (可能因进程中断或超时)",
       },
     ],
     isError: true,
