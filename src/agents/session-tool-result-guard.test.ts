@@ -98,7 +98,7 @@ describe("installSessionToolResultGuard", () => {
     };
     expect(synthetic.toolCallId).toBe("call_1");
     expect(synthetic.isError).toBe(true);
-    expect(synthetic.content?.[0]?.text).toContain("missing tool result");
+    expect(synthetic.content?.[0]?.text).toContain("tool result not captured");
   });
 
   it("flushes pending tool calls when asked explicitly", () => {
