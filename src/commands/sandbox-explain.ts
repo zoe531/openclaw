@@ -102,6 +102,10 @@ function resolveActiveChannel(params: {
         // Legacy keys (pre-rename).
         lastProvider?: string;
         provider?: string;
+        // Origin object containing provider info from message context.
+        origin?: {
+          provider?: string;
+        };
       }
     | undefined;
   const candidate = (
@@ -109,6 +113,7 @@ function resolveActiveChannel(params: {
     entry?.channel ??
     entry?.lastProvider ??
     entry?.provider ??
+    entry?.origin?.provider ??
     ""
   )
     .trim()

@@ -59,7 +59,8 @@ export function createDiscordMessageHandler(
     buildKey: (entry) => {
       const message = entry.data.message;
       const authorId = entry.data.author?.id;
-      if (!message || !authorId) {
+      const messageId = entry.data.message?.id;
+      if (!message || !authorId || !messageId) {
         return null;
       }
       const channelId = resolveDiscordMessageChannelId({
@@ -69,7 +70,9 @@ export function createDiscordMessageHandler(
       if (!channelId) {
         return null;
       }
-      return `discord:${params.accountId}:${channelId}:${authorId}`;
+      // Include messageId to prevent duplicate processing when Discord Gateway
+      // reconnects or retries message delivery (fixes #37844)
+      return `discord:${params.accountId}:${channelId}:${authorId}:${messageId}`;
     },
     shouldDebounce: (entry) => {
       const message = entry.data.message;
